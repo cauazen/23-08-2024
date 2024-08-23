@@ -1,27 +1,24 @@
 const produto = [{
-    nome:"banana", preço: 3, quantidade: 5},
-{nome: "laranja", preço: 4, quantidade: 5}];
-
+    nome: "banana", preço: 3, quantidade: 5
+}, {
+    nome: "laranja", preço: 4, quantidade: 5
+}];
 
 function adicionarProduto(nome, preço, quantidade) {
-    
     if (!nome || !preço || !quantidade) {
         console.error("Todos os campos devem ser preenchidos.");
         return;
     }
 
-    
-    if (preço && quantidade <= 0 ) {
-        console.error("O preço e quantidade deve ser um número maior que 0.");
+    if (preço <= 0 || quantidade <= 0) {
+        console.error("O preço e a quantidade devem ser números maiores que 0.");
         return;
     }
 
-    
     const novoProduto = { nome, preço, quantidade };
     produto.push(novoProduto);
     console.log("Produto adicionado.");
 }
-
 
 function listarProduto() {
     if (produto.length === 0) {
@@ -35,9 +32,26 @@ function listarProduto() {
     });
 }
 
+function calcularValorTotal() {
+    if (produto.length === 0) {
+        console.log("Nenhum produto cadastrado para calcular o valor total.");
+        return;
+    }
+
+    let valorTotal = 0;
+
+    produto.forEach(p => {
+        valorTotal += p.preço * p.quantidade;
+    });
+
+    console.log(`Valor total dos produtos em estoque: R$ ${valorTotal.toFixed(2)}`);
+}
+
 
 adicionarProduto("maçã", 10, 5);
 
- 
 
-listarProduto(); 
+listarProduto();
+
+
+calcularValorTotal();
